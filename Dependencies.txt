@@ -1,0 +1,20 @@
+matplotlib              3.0.3, 3.1.1            pip3, anaconda
+meshpy                  2018.2.1                pip3, anaconda, conda forge
+networkx                2.3                     pip3, anaconda
+numpy                   1.16.3, 1.16.4          pip3, anaconda
+opencv-python (cv2)     3.4.2, 4.1.0            pip3, anaconda
+pandas                  0.24.2                  pip3, anaconda
+pillow                  6.0.0, 6.1.0            pip3, anaconda
+python                  3.7.3                   pip3, anaconda
+scipy                   1.2.1, 1.3.0            pip3, anaconda
+scikit-image (skimage)  0.15.0                  pip3, anaconda
+shapely                 1.6.4                   pip3, anaconda
+tifffile                2019.5.30, 2019.7.2     pip3, anaconda
+tqdm                    4.32.2                  pip3, anaconda
+trackpy                 0.4.1                   pip3, anaconda conda forge
+
+
+
+
+
+
