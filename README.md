@@ -28,15 +28,19 @@ G.nodes[1]['name'] = 'alpha'
 
 ### avec les platines
 1. s'assurer que les ports USB ont les bonnes permissions. Une possibilité est de les transférer au groupe *pimotor*
-Si 
->$ ls -l /dev/ttyUSB*
+Si les ports ttyUSB* appartiennent au groupe dialout
+```
+$ ls -l /dev/ttyUSB*
 crw-rw---- 1 root dialout 188, 0 juin   2 10:00 /dev/ttyUSB0
 crw-rw---- 1 root dialout 188, 1 juin   2 09:59 /dev/ttyUSB1
+```
 
-Alors
+Alors on peut changer pour le groupe pimotor avec:
+```
 >$ sudo chgrp pimotor /dev/ttyUSB*
+```
 
-et vérifier que 
+On vérifie que les groupes ont bien changé:
 ```
 ls -l /dev/ttyUSB*
 crw-rw---- 1 root pimotor 188, 0 juin   2 10:00 /dev/ttyUSB0
@@ -45,18 +49,20 @@ crw-rw---- 1 root pimotor 188, 1 juin   2 09:59 /dev/ttyUSB1
 
 2. et de s'assurer que l'utilisateurs est bien dans le groupe pimotor
 Ici, l'utilisateur *dyco* a été ajouté au groupe *pimotor* (attention la sortie de cette commande n'est à jour qu'après deconnexion / reconnexion)
-> $ groups dyco
+``` 
+$ groups dyco
 dyco : dyco adm cdrom sudo dip plugdev lpadmin sambashare manip pimotor 
+```
 
 3. Si erreur 
-> pipython.pidevice.gcserror.GCSError: Unallowable move attempted on unreferenced axis, or move attempted with servo off (5)
+```
+pipython.pidevice.gcserror.GCSError: Unallowable move attempted on unreferenced axis, or move attempted with servo off (5)
+```
 
 vérifier que les controleurs sont *on* et référencées avec les commandes suivantes executées depuis *PI_terminal*:
-> SVO 1 1
-
-> FNL 1
-
-> FPL 1
-
-> MOV 1 1
- 
+```
+SVO 1 1
+FNL 1
+FPL 1
+MOV 1 1
+``` 
