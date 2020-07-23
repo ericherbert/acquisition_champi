@@ -51,6 +51,7 @@ dyco : dyco adm cdrom sudo dip plugdev lpadmin sambashare manip pimotor
 
 vérifier que les controleurs sont *on* et référencées avec les commandes suivantes executées depuis *PI_terminal*:
 > SVO 1 1
-FNL 1
-FNL 1
+> FNL 1
+> FPL 1
+> MOV 1 1
  
