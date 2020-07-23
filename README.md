@@ -37,9 +37,11 @@ Alors
 >$ sudo chgrp pimotor /dev/ttyUSB*
 
 et vérifier que 
->$ ls -l /dev/ttyUSB*
+```
+ls -l /dev/ttyUSB*
 crw-rw---- 1 root pimotor 188, 0 juin   2 10:00 /dev/ttyUSB0
 crw-rw---- 1 root pimotor 188, 1 juin   2 09:59 /dev/ttyUSB1 
+```
 
 2. et de s'assurer que l'utilisateurs est bien dans le groupe pimotor
 Ici, l'utilisateur *dyco* a été ajouté au groupe *pimotor* (attention la sortie de cette commande n'est à jour qu'après deconnexion / reconnexion)
