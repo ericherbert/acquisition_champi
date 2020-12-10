@@ -2,7 +2,7 @@
 
 ## Mise en oeuvre.
 
-Tout est passé sur python 3.7. Si cette version n'est pas disponible, utiliser un environnement virtuel. Typiquement pour le serveur sous debian 9 (python 3.5), il faut passer par conda:
+Le traitement est passé sur python 3.8 et networkx 2.5 Si cette version n'est pas disponible, utiliser un environnement virtuel. Typiquement pour le serveur sous debian 9 (python 3.5), il faut passer par conda:
 
 ```
 $ conda base
@@ -14,8 +14,9 @@ puis
 $ python3 VST.py
 ```
 
-## À faire
-la fonction G.node est dépréciée dans networkx 2.4. À priori le changement à faire serait simplement d'ajouter un *s*:
+## Modifs
+### G.node
+la fonction G.node est dépréciée dans networkx 2.4. fait est d'ajouter un *s*:
 ```
 G.node[1]['name'] = 'alpha'
 ```
@@ -23,6 +24,12 @@ devient
 ```
 G.nodes[1]['name'] = 'alpha'
 ```
+
+### nx.connected_component_subgraphs
+nx.connected_component_subgraphs deprecated in nx2.1 and removed from 2.4, replace by 
+    (G.subgraph(c) for c in connected_components(G))
+    Or (G.subgraph(c).copy() for c in connected_components(G))
+    Gcc = sorted(nx.connected_component_subgraphs(G), key=len, reverse=True)
 
 ## En cas de problème 
 
