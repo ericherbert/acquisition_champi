@@ -1,5 +1,19 @@
 # Readme des traitements panoramas
 
+## branches 
+1. networkx21
+branche par défaut, pour version de networkx jusqu'à 2.1
+
+1. networkx25
+branche par défaut, pour version de networkx jusqu'à 2.5
+
+1. Py38 nx25
+à supprimer
+
+1. master 
+à réutiliser ?
+
+
 ## Mise en oeuvre.
 
 Tout est passé sur python 3.7. Si cette version n'est pas disponible, utiliser un environnement virtuel. Typiquement pour le serveur sous debian 9 (python 3.5), il faut passer par conda:
