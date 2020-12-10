@@ -22,9 +22,9 @@ start = time.time()
 ## General parameters 
 
 # absolute path of the experimental images stack (binarized or grayscale, not RGB/RGBA)
-exp_path = '/home/eh/Nextcloud/recherche/racines/acquisition_champi/Images_test/slac_b_19d_germ_control_bin_c.tiff' 
+exp_path = '/home/eh/Nextcloud/recherche/racines/acquisition_champi/Images_test/test.tiff' 
 # absolute path of the binarized images stack     
-bin_path = '/home/eh/Nextcloud/recherche/racines/acquisition_champi/Images_test/slac_b_19d_germ_control_bin_c.tiff'
+bin_path = '/home/eh/Nextcloud/recherche/racines/acquisition_champi/Images_test/test.tiff'
 # absolute path of the directory where the results will be stored in
 dest_path = '/home/eh/Nextcloud/recherche/racines/acquisition_champi/Images_test/out/'
 unstack = False # enable to save every slice of the binarized tif stack as png

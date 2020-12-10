@@ -1,0 +1,3 @@
+To compile your own C_net_functions.so file, run 
+python setup_C_net_functions.py build_ext --inplace 
+This should create two files called C_net_functions.so and C_net_functions.c, the first you need, the latter you can safely delete. 
