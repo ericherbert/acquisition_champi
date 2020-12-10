@@ -14,6 +14,14 @@ puis
 $ python3 VST.py
 ```
 
+ou pour une image unique
+```
+$ python3 VS_one.py
+```
+
+Attention que les images soient bien binarisées et pas en niveau de gris.
+
+
 ## Modifs
 ### G.node
 la fonction G.node est dépréciée dans networkx 2.4. fait est d'ajouter un *s*:
@@ -30,6 +38,13 @@ nx.connected_component_subgraphs deprecated in nx2.1 and removed from 2.4, repla
     (G.subgraph(c) for c in connected_components(G))
     Or (G.subgraph(c).copy() for c in connected_components(G))
     Gcc = sorted(nx.connected_component_subgraphs(G), key=len, reverse=True)
+
+
+### Images_test/
+contient des images pour faire des tests rapides
+
+### C_net_functions/
+contient les utilitaires pour compiler net_utilities.
 
 ## En cas de problème 
 
