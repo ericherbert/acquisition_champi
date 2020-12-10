@@ -332,14 +332,14 @@ def createGraph(adjacency_matrix, all_triangles):
     nx.set_node_attributes(G, attr, 'conductivity')
 
     # Sets thickness of edges as mean over the thickness of the nodes it connects
-    radius_edge = [(G.node[edge[0]]['conductivity'] + 
-                    G.node[edge[1]]['conductivity'])/2.0 for edge in G.edges()]
+    radius_edge = [(G.nodes[edge[0]]['conductivity'] + 
+                    G.nodes[edge[1]]['conductivity'])/2.0 for edge in G.edges()]
     attr = dict(zip(G.edges(), radius_edge))
     nx.set_edge_attributes(G, attr, 'conductivity')
 
     # Sets length of the edges
-    length_edge = [math.sqrt((G.node[edge[0]]['x']-G.node[edge[1]]['x'])**2 + 
-                             (G.node[edge[0]]['y']-G.node[edge[1]]['y'])**2 ) 
+    length_edge = [math.sqrt((G.nodes[edge[0]]['x']-G.nodes[edge[1]]['x'])**2 + 
+                             (G.nodes[edge[0]]['y']-G.nodes[edge[1]]['y'])**2 ) 
                         for edge in G.edges()]
     attr = dict(zip(G.edges(), length_edge))
     nx.set_edge_attributes(G, attr, 'weight')
@@ -463,7 +463,7 @@ def drawGraphTriangulation(G, triangles, image_name, dest, distance_map,
     scale = 1
     pos = {}
     for k in G.node.keys():
-        pos[k] = (G.node[k]['x']*scale, G.node[k]['y']*scale)
+        pos[k] = (G.nodes[k]['x']*scale, G.nodes[k]['y']*scale)
 
     widths = np.array([G[e[0]][e[1]]['conductivity'] for e in G.edges()])*scale
     widths = 15./(np.amax(widths)*13)*widths
@@ -495,14 +495,14 @@ def _drawGraph(G, verbose, n_size, height):
     :param int height: the image height
     """
 
-    start = time.clock()
+    start = time.time()
     scale = 1
     ax = plt.gca()
     ax.set_aspect('equal')
     plt.axis('off')
     pos = {}
-    for k in G.node.keys():
-        pos[k] = (G.node[k]['x']*scale, height - G.node[k]['y']*scale)
+    for k in G.nodes.keys():
+        pos[k] = (G.nodes[k]['x']*scale, height - G.nodes[k]['y']*scale)
     
     # Edges drawing
     edgelist = [(e[0], e[1]) for e in G.edges(data=True) if e[2]['weight']<1000]
@@ -524,7 +524,7 @@ def _drawGraph(G, verbose, n_size, height):
                            node_color=colors, linewidths=0, node_shape='o')
 
     if verbose:
-        print("\t from _drawGraph: drawing took %1.2f sec"%(time.clock()-start))
+        print("\t from _drawGraph: drawing took %1.2f sec"%(time.time()-start))
 
 def drawAndSave(G, image_name, dest, parameters, verbose, plot, figure_format,
                 dpi, graph_format, n_size, height):
@@ -547,9 +547,14 @@ def drawAndSave(G, image_name, dest, parameters, verbose, plot, figure_format,
     :param int height: the image height
     """
     
-    start = time.clock()
+    start = time.time()
        
+    """ nx.connected_component_subgraphs deprecated in nx2.1 and removed from 2.4, replace by 
+    (G.subgraph(c) for c in connected_components(G))
+    Or (G.subgraph(c).copy() for c in connected_components(G))
     Gcc = sorted(nx.connected_component_subgraphs(G), key=len, reverse=True)
+    """       
+    Gcc = sorted((G.subgraph(c) for c in nx.connected_components(G)), key=len, reverse=True)
     G = Gcc[0]
         
     graph_name = image_name + '_graph'
@@ -562,7 +567,7 @@ def drawAndSave(G, image_name, dest, parameters, verbose, plot, figure_format,
         plt.savefig(os.path.join(dest, graph_name + '.' + figure_format), 
                     dpi=dpi, bbox_inches='tight')
 
-    figure_save = time.clock()
+    figure_save = time.time()
     
     if graph_format == 'gpickle':
         nx.write_gpickle(G, os.path.join(dest, graph_name + '.gpickle'), 
@@ -588,7 +593,7 @@ def drawAndSave(G, image_name, dest, parameters, verbose, plot, figure_format,
         else:
             print("Unknown graph format!")
 
-    graph_save = time.clock()
+    graph_save = time.time()
     if verbose:
         print("\t from drawAndSave: figure saving took %1.2f sec"\
               %(figure_save-start))
@@ -983,8 +988,8 @@ def drawNodesRandomColors(G, img, size, colors):
     # Nodes drawing
     for node_id, node_tag in dict_tag.items():
         
-        x = int(G.node[node_id]['x'])
-        y = int(G.node[node_id]['y'])
+        x = int(G.nodes[node_id]['x'])
+        y = int(G.nodes[node_id]['y'])
         
         if node_tag in colors:
             color = colors[node_tag]
