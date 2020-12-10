@@ -263,8 +263,13 @@ def overlay(main_params, output_params, drawing_params, manual_log_path=''):
     if debug:
         txt = 'SUP>    Binarized stack shape: {}'.format(bin_stack.shape)
         log_txt = nu.printAndUpdateLog(txt, log_txt, verbose)
-    slices_nb_bin = bin_stack.shape[0]    
     
+    # Add third axis for single image      
+    if len(bin_stack.shape)==2:
+        bin_stack = bin_stack[np.newaxis,:,:]
+    
+    slices_nb_bin = bin_stack.shape[0]    
+
     # To differentiate slices with mycelium from those without
     empty = []
     thalle = np.zeros(slices_nb_bin)
@@ -293,6 +298,9 @@ def overlay(main_params, output_params, drawing_params, manual_log_path=''):
     if debug:
         txt = 'SUP>    Grayscale stack shape: {}'.format(exp_stack.shape)
         log_txt = nu.printAndUpdateLog(txt, log_txt, verbose)
+    # Add third axis for single image      
+    if len(exp_stack.shape)==2:
+        exp_stack = exp_stack[np.newaxis,:,:]
     slices_nb_exp, height, width = exp_stack.shape
    
     timer = time.time()
