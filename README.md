@@ -1,6 +1,7 @@
 # Readme des traitements panoramas
 
-## branches 
+## Branches. 
+
 1. networkx21
 branche par défaut, pour version de networkx jusqu'à 2.1
 
